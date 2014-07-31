@@ -30,7 +30,7 @@ def receive_text():
 	for line in response:
 		response_dict = simplejson.loads(line)
 
-	if response_dict['total_rows'] == 0:
+	if response_dict['total_rows'] == 0 or json.contains(response_dict, "error"):
 		resp = twilio.twiml.Response()
 		resp.message(error_message)
 		return str(resp)
