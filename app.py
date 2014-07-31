@@ -4,7 +4,7 @@ from flask import Flask, request, redirect
 import urllib, simplejson
 import twilio.twiml
 
-error_message = "We apologize for the inconvenience, we are unable to "
+error_message = "We apologize for the inconvenience, but we are unable to "
 error_message += "determine the closest 'free internet'. "
 error_message += "Please try another Stop ID. Thank you!"
 
@@ -12,11 +12,11 @@ app = Flask(__name__)
 
 @app.route("/",methods=["GET","POST"])
 def receive_text():
-	"""Function that performs main functionality of app ie;
-	logs received text message information to a Google Spreadsheet and replys
+	"""Function that performs main functionality of app, i.e.
+	logs received text message information to a Google Spreadsheet and replies
 	with a text message that states the name and address of the 3 closest
 	locations for 'free internet' from the bus stop that corresponds to the
-	recieved ID.
+	received ID.
 	"""
 	results = ""
 	stop_ID = request.values.get("Body")
