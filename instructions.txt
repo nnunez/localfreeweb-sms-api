@@ -3,12 +3,12 @@ Twilio will send our app the request
 Our app logs the date, time, phone number and stop ID in this Google Spreadsheet:
 https://docs.google.com/spreadsheets/d/1S4jHX9__Drog_qqGsDJYFuO7KvRP9BUD8A95xQ5kkQU/edit?usp=sharing 
 
-Our app will ask cartodb where that bus stop lives?
+Our app will ask CartoDB where that bus stop lives
 http://localfreeweb.cartodb.com/api/v2/sql?q=SELECT stop_lat, stop_lon FROM stops WHERE stop_id = 660
 
-CartoDb will return the lat, lon
+CartoDB will return the lat, lon
 
-Our flask app will use that lat, lon to ask CartoDB the give us the three closest to that lat lon
+Our Flask app will use that lat, lon to ask CartoDB to give us the three locations closest to that lat, lon
 http://localfreeweb.cartodb.com/api/v2/sql?q=SELECT name, ST_Distance(the_geom::geography, ST_PointFromText('POINT(-122.475096 37.72119)', 4326)::geography) AS distance FROM freeweb ORDER BY distance ASC LIMIT 3
 
-Our flask app will then tell Twilio to text the data back to that person.
+Our Flask app will then tell Twilio to text the data back to the user
